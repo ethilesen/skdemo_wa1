@@ -1,0 +1,4 @@
+curl -H "Content-Type: application/json" \
+-X POST -u "apikey:6MiENwozVXYMxoZxTXBcndMKNehtAQAFbVUCdEG4bazL" \
+-d @skill-Skatteetaten.json \
+"https://gateway.watsonplatform.net/assistant/api/v1/workspaces?version=2018-09-20"
