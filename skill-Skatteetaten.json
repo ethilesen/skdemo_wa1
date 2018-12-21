@@ -1,0 +1,938 @@
+{
+  "name": "Skatteetaten",
+  "intents": [
+    {
+      "intent": "bestille",
+      "examples": [
+        {
+          "text": "Hei kan du hjelpe meg å bestille nytt skattekort?"
+        },
+        {
+          "text": "Hei kan du hjelpe meg å bestille ny fødselsattest?"
+        },
+        {
+          "text": "Hei kan du hjelpe meg å bestille nytt førerkot?"
+        },
+        {
+          "text": "Hei kan du hjelpe meg å bestille dødsatest?"
+        },
+        {
+          "text": "trenger skattekort"
+        },
+        {
+          "text": "trenger ny fødselsattest"
+        },
+        {
+          "text": "Jeg må bestille nytt for 2019"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "selge",
+      "examples": [
+        {
+          "text": "skal selge bilen min"
+        },
+        {
+          "text": "jeg skal selge huset"
+        },
+        {
+          "text": "jeg har solgt huset"
+        },
+        {
+          "text": "selger hytta neste år"
+        },
+        {
+          "text": "selger alt jeg eier og har"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "bekreft",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "ja",
+          "synonyms": [
+            "joda",
+            "takk",
+            "fint",
+            "ok"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "nei",
+          "synonyms": [
+            "feil",
+            "ikke",
+            "noop"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "navn",
+      "values": []
+    },
+    {
+      "entity": "fremtid",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "fremtid",
+          "synonyms": [
+            "neste uke",
+            "kommer til",
+            "neste år",
+            "neste måned",
+            "i morgen"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "alder",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "år",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "adresse",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "lierbakken 77 1418 drammen",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Vestveien 1 0284 Oslo",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Jutulskrenten 11 1787 frogn",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "entity": "sys-time",
+      "values": []
+    },
+    {
+      "entity": "test",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "tjeneste",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "julekort",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "skattekort",
+          "synonyms": [
+            "skatekort",
+            "skattesedel",
+            "skattegreie"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "fødselsattest",
+          "synonyms": [
+            "fødselskort",
+            "fødtkort",
+            "fødselsbevis",
+            "fødselsbrev",
+            "født"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "førerkort",
+          "synonyms": [
+            "kjørekort",
+            "lappen"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "language": "en",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-09-20"
+    }
+  },
+  "description": "",
+  "dialog_nodes": [
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_50_1545376869873",
+      "metadata": {},
+      "variable": "$adresse",
+      "dialog_node": "slot_52_1545377705079"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Hva er din nye adresse?"
+      },
+      "parent": "slot_52_1545377705079",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_54_1545377705079",
+      "previous_sibling": "handler_53_1545377705079"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_52_1545377705079",
+      "context": {
+        "adresse": "@adresse"
+      },
+      "conditions": "@adresse",
+      "event_name": "input",
+      "dialog_node": "handler_53_1545377705079"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok - da har vi feil adresse på deg."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1545310652679",
+      "metadata": {},
+      "conditions": "@bekreft:nei",
+      "dialog_node": "node_12_1545310752567",
+      "previous_sibling": "node_11_1545310750470"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Da er det på vei i posten -ha en fin dag -;)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1545310652679",
+      "metadata": {},
+      "conditions": "@bekreft:ja",
+      "dialog_node": "node_11_1545310750470",
+      "previous_sibling": "slot_55_1545378030956"
+    },
+    {
+      "type": "slot",
+      "parent": "node_10_1545310652679",
+      "dialog_node": "slot_55_1545378030956"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_55_1545378030956",
+      "event_name": "focus",
+      "dialog_node": "handler_57_1545378030956",
+      "previous_sibling": "handler_56_1545378030956"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_55_1545378030956",
+      "event_name": "input",
+      "dialog_node": "handler_56_1545378030956"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_5_1545161306752",
+      "event_name": "focus",
+      "dialog_node": "handler_7_1545161306752",
+      "previous_sibling": "handler_6_1545161306752"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_5_1545161306752",
+      "context": {
+        "tjeneste": "@tjeneste"
+      },
+      "conditions": "@tjeneste",
+      "event_name": "input",
+      "dialog_node": "handler_6_1545161306752"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_30_1545311360045",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_32_1545311360045",
+      "previous_sibling": "handler_31_1545311360045"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_30_1545311360045",
+      "metadata": {},
+      "event_name": "input",
+      "dialog_node": "handler_31_1545311360045"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "Welcome",
+      "metadata": {},
+      "variable": "$tid",
+      "dialog_node": "slot_40_1545314989069",
+      "previous_sibling": "node_44_1545315284800"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "God ettermiddag Ola Normann - Velkommen Skatteetaten , her kan du få hjelp om våre tjenester"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "metadata": {},
+      "conditions": "now().after('12:00:00')",
+      "dialog_node": "node_44_1545315284800",
+      "previous_sibling": "node_43_1545315275029"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "God morgen Ola Normann - Velkommen Skatteetaten , her kan du få hjelp om våre tjenester"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "Welcome",
+      "metadata": {},
+      "conditions": "now().before('12:00:00')",
+      "dialog_node": "node_43_1545315275029"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1545307398076",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1545307398076",
+      "previous_sibling": "handler_2_1545307398076"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_1_1545307398076",
+      "event_name": "input",
+      "dialog_node": "handler_2_1545307398076"
+    },
+    {
+      "type": "standard",
+      "title": "adresse validering",
+      "output": {},
+      "parent": "node_1_1545300781703",
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "true",
+      "dialog_node": "node_22_1545311234590",
+      "digress_out": "allow_all"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok - da har vi feil adresse på deg. Har d flyttet i det siste ?"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "node_22_1545311234590",
+      "metadata": {},
+      "conditions": "@bekreft:nei",
+      "dialog_node": "node_27_1545311234592",
+      "previous_sibling": "node_26_1545311234592"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Da er det på vei i posten -ha en fin dag -;)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_22_1545311234590",
+      "metadata": {},
+      "conditions": "@bekreft:ja",
+      "dialog_node": "node_26_1545311234592",
+      "previous_sibling": "slot_23_1545311234592"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_22_1545311234590",
+      "metadata": {},
+      "dialog_node": "slot_23_1545311234592"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_4_1545307632044",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1545307632044",
+      "previous_sibling": "handler_5_1545307632044"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_4_1545307632044",
+      "context": {
+        "adresse": "@adresse"
+      },
+      "conditions": "@adresse",
+      "event_name": "input",
+      "dialog_node": "handler_5_1545307632044"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hei Ola, da sender vi det med post til din hjemmeadresse. Vi har følgende adresse på deg : Juvassbotn. 22, 0967 Oslo - er det riktig adresse ?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1545209294091",
+      "metadata": {},
+      "conditions": "@tjeneste:skattekort",
+      "dialog_node": "node_9_1545209425699",
+      "previous_sibling": "node_10_1545310652679"
+    },
+    {
+      "type": "slot",
+      "parent": "node_8_1545209294091",
+      "dialog_node": "slot_1_1545307398076",
+      "previous_sibling": "node_9_1545307986901"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1545209294091",
+      "metadata": {},
+      "dialog_node": "node_9_1545307986901",
+      "previous_sibling": "node_10_1545209429111"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "node_8_1545209294091",
+      "metadata": {},
+      "dialog_node": "node_10_1545209429111",
+      "previous_sibling": "node_9_1545209425699"
+    },
+    {
+      "type": "frame",
+      "title": "adresse validering",
+      "output": {},
+      "parent": "node_8_1545209294091",
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_50_1545376869873"
+      },
+      "conditions": "true",
+      "dialog_node": "node_10_1545310652679",
+      "digress_out": "allow_all",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Jeg forstår at du ønsker å bestille noe. Hos meg kan du bestille (Skattekort, Julekort og Fødselsattest). vennligst beskriv hva du ønsker å bestille?"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "conditions": "@tjeneste != 'skattekort' || 'fødselsattest'||'julekort'",
+      "dialog_node": "node_4_1545161218222",
+      "previous_sibling": "node_36_1545312108719"
+    },
+    {
+      "type": "slot",
+      "parent": "node_1_1545160719265",
+      "variable": "$tjeneste",
+      "dialog_node": "slot_5_1545161306752",
+      "previous_sibling": "node_50_1545376869873"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_28_1545311360044"
+      },
+      "conditions": "@tjeneste:julekort",
+      "dialog_node": "node_36_1545312108719",
+      "previous_sibling": "node_35_1545312070021"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_1_1545300781703"
+      },
+      "conditions": "@tjeneste:fødselsattest",
+      "dialog_node": "node_35_1545312070021",
+      "previous_sibling": "node_2_1545161108167"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "variable": "$adresse",
+      "dialog_node": "slot_4_1545307632044",
+      "previous_sibling": "slot_5_1545161306752"
+    },
+    {
+      "type": "standard",
+      "title": "Julekort",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Så hyggelig - da sender vi ut Julekort med posten i morgen tidlig. <li> God Jul og Godt Nytt år! </li>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "conditions": "#bestille && @tjeneste:julekort",
+      "dialog_node": "node_28_1545311360044",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_1_1545300781703"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": ""
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_8_1545209294091"
+      },
+      "conditions": "@tjeneste:skattekort",
+      "dialog_node": "node_2_1545161108167",
+      "previous_sibling": "slot_4_1545307632044"
+    },
+    {
+      "type": "standard",
+      "title": "Fødselsattest",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok - Du ønsker å få tilsendt kopi av din fødselsattest ?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {},
+      "conditions": "#bestille && @tjeneste:fødselsattest",
+      "dialog_node": "node_1_1545300781703",
+      "previous_sibling": "node_8_1545209294091"
+    },
+    {
+      "type": "frame",
+      "title": "return response",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ok da bruker vi $adresse ! Takk for din henvendelse - velkommen tilbake en annen gang..."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1545160719265",
+      "metadata": {
+        "fallback": "leave"
+      },
+      "conditions": "$nyadresse=true && @adresse>0",
+      "dialog_node": "node_50_1545376869873",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_28_1545311360044",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "frame",
+      "title": "Skattekort",
+      "output": {},
+      "parent": "node_1_1545160719265",
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#bestille && @tjeneste:skattekort",
+      "dialog_node": "node_8_1545209294091",
+      "digress_out": "allow_all",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "standard",
+      "title": "adresse validering",
+      "output": {},
+      "parent": "node_28_1545311360044",
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "true",
+      "dialog_node": "node_29_1545311360045"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Ok - da har vi feil adresse på deg. Har d flyttet i det siste ?"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "node_29_1545311360045",
+      "metadata": {},
+      "conditions": "@bekreft:nei",
+      "dialog_node": "node_34_1545311360045",
+      "previous_sibling": "node_33_1545311360045"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Da er det på vei i posten -ha en fin dag -;)"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_29_1545311360045",
+      "metadata": {},
+      "conditions": "@bekreft:ja",
+      "dialog_node": "node_33_1545311360045",
+      "previous_sibling": "slot_30_1545311360045"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_29_1545311360045",
+      "metadata": {},
+      "dialog_node": "slot_30_1545311360045"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_23_1545311234592",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_25_1545311234592",
+      "previous_sibling": "handler_24_1545311234592"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_23_1545311234592",
+      "metadata": {},
+      "event_name": "input",
+      "dialog_node": "handler_24_1545311234592"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_40_1545314989069",
+      "event_name": "focus",
+      "dialog_node": "handler_42_1545314989069",
+      "previous_sibling": "handler_41_1545314989069"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_40_1545314989069",
+      "context": {
+        "tid": ""
+      },
+      "metadata": {},
+      "event_name": "input",
+      "dialog_node": "handler_41_1545314989069"
+    },
+    {
+      "type": "standard",
+      "title": "Til manuell behandling",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "dialog_node": "node_39_1545314828170",
+      "previous_sibling": "node_38_1545314813721"
+    },
+    {
+      "type": "standard",
+      "title": "Noe Annet?",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "",
+            "options": [],
+            "response_type": "option"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_39_1545314828170"
+    },
+    {
+      "type": "folder",
+      "title": "FAQ",
+      "metadata": {},
+      "dialog_node": "node_38_1545314813721",
+      "previous_sibling": "node_37_1545314786361"
+    },
+    {
+      "type": "frame",
+      "output": {},
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#bestille",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_1_1545160719265",
+      "digress_out": "allow_all",
+      "previous_sibling": "Welcome",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "folder",
+      "title": "Chit Chat",
+      "metadata": {},
+      "dialog_node": "node_37_1545314786361",
+      "previous_sibling": "node_1_1545160719265"
+    },
+    {
+      "type": "standard",
+      "title": "Velkommen",
+      "output": {},
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "welcome",
+      "digress_in": "does_not_return",
+      "dialog_node": "Welcome",
+      "digress_out": "allow_all"
+    }
+  ],
+  "workspace_id": "b6ed6b9e-046d-448d-896e-2bf395dc3642",
+  "counterexamples": [],
+  "system_settings": {
+    "tooling": {
+      "store_generic_responses": true
+    }
+  },
+  "learning_opt_out": false,
+  "status": "Available"
+}
