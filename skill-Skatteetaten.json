@@ -1,5 +1,5 @@
 {
-  "name": "Skatteetaten_v0.1.0.1",
+  "name": "Skatteetaten_v0.1.0.1  ",
   "intents": [
     {
       "intent": "bestille",
@@ -150,7 +150,7 @@
           "value": "skattekort",
           "synonyms": [
             "skatekort",
-            "skattesedel",
+            "skatteseddel",
             "skattegreie"
           ]
         },
@@ -162,7 +162,7 @@
             "fødtkort",
             "fødselsbevis",
             "fødselsbrev",
-            "født"
+            "fødtkort"
           ]
         },
         {
@@ -243,7 +243,7 @@
           {
             "values": [
               {
-                "text": "Da er det på vei i posten -ha en fin dag -;)"
+                "text": "Da er det på vei i posten - ha en fin dag -;)"
               }
             ],
             "response_type": "text",
@@ -857,13 +857,13 @@
           {
             "values": [
               {
-                "text": "I didn't understand. You can try rephrasing."
+                "text": "Jeg vet ikke om jeg fårstår hva du ønkser kan du prøve på nytt?"
               },
               {
-                "text": "Can you reword your statement? I'm not understanding."
+                "text": "Jeg fårstår ikke kan du skrive spørsmålet på nytt?"
               },
               {
-                "text": "I didn't get your meaning."
+                "text": "Beklager jeg får deg ikke..."
               }
             ],
             "response_type": "text",
